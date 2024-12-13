@@ -17,7 +17,7 @@ const createCard = (user) => {
   newCard.classList.add('border', 'border-2', 'border-info', 'row', 'm-3');
   newCard.innerHTML = `<div class="card">
     <div class="card-body">
-      <h5 class="card-title">User</h5>
+  
       <p class="card-text">${user.nome} ${user.cognome}</p>
     </div>
   </div>`;
@@ -56,3 +56,23 @@ elimina.addEventListener('click', (e) => {
   e.preventDefault();
   eliminaElemento();
 });
+
+
+//timer
+let count = JSON.parse(sessionStorage.getItem('key')) || 0;
+
+const startTimer = () => {
+  const timer = document.createElement('p');
+  
+  timer.innerText = `Questa sessione è aperta da ${count} secondi`;
+  document.body.appendChild(timer);
+
+  setInterval(() => {
+    count++;
+    timer.innerText = `Questa sessione è aperta da ${count} secondi`;
+
+    sessionStorage.setItem('key', JSON.stringify(count));
+  }, 1000);
+};
+
+startTimer();
